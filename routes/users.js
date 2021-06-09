@@ -33,9 +33,8 @@ router.post('/', async (req, res) => {
       // 422 : Unprocessable Entity
       return res.status(422).send('Please fill all fields!');
     }
-    res.status(500).send('Generic error message');
   }
-  return null;
+  return res.status(500).send('Generic error message');
 });
 
 router.put('/:id', async (req, res) => {
