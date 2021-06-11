@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "lint": "eslint \"./**/*.js\" --fix .",
+    "dev": "nodemon server.js",
     "prettify": "prettier --write ."
   },
   "eslintConfig": {
@@ -37,10 +38,11 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
     "husky": "4.3.8",
     "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
   },
   "lint-staged": {
