@@ -4,10 +4,12 @@ const { backPort } = require('./conf');
 
 const app = express();
 const usersRoutes = require('./routes/users');
+const appsRoutes = require('./routes/apps');
 
 app.use(express.json());
 app.use(cors());
 app.use('/users', usersRoutes);
+app.use('/apps', appsRoutes);
 
 app.use('/auth', require('./routes/auth'));
 app.use('/', require('./routes/misc'));
