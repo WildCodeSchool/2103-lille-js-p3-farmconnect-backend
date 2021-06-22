@@ -25,7 +25,6 @@ passport.use(
         const user = { id, email, firstname, lastname };
         return done(null, user);
       } catch (e) {
-        console.log(e);
         return done(e);
       }
     }
