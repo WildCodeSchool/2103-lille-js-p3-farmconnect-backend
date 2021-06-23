@@ -1,11 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport');
 const { backPort } = require('./conf');
 
 const app = express();
 const usersRoutes = require('./routes/users');
 
 app.use(express.json());
+app.use(passport.initialize());
+
 app.use(cors());
 app.use('/users', usersRoutes);
 
