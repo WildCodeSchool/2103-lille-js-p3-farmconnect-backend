@@ -4,7 +4,8 @@ const router = express.Router();
 const { db } = require('../conf');
 
 router.get('/', async (req, res) => {
-  const sql = 'SELECT email, password FROM users';
+  const sql =
+    'SELECT id, firstname, lastname, zipcode, city, country, email, mobile FROM users where email=?';
   const [results] = await db.query(sql);
   res.json(results);
 });
