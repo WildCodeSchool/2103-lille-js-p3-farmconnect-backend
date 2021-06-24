@@ -24,7 +24,6 @@ router.post('/signup', async (req, res) => {
 router.post('/login', passport.authenticate('local'), (req, res) => {
   const token = jwt.sign(req.user, jwtsecret);
   res.status(200).json({ id: req.user.id, token });
-  console.log(token);
 });
 
 module.exports = router;
