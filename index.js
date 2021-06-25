@@ -12,7 +12,6 @@ app.use(cors());
 app.use('/users', usersRoutes);
 
 app.use('/auth', require('./routes/auth'));
-app.use('/', require('./routes/misc'));
 
 app.use((req, res) => {
   const msg = `Page not found: ${req.url}`;
