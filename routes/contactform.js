@@ -7,17 +7,18 @@ const nodemailer = require('nodemailer');
 const contactMail = nodemailer.createTransport({
   service: process.env.SERVICE,
   auth: {
+    secure: true,
     user: process.env.CONTACT_EMAIL,
     pass: process.env.EMAIL_PASSWORD,
+    rejectUnauthorized: false,
   },
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   const { firstName, lastName, email, message, phoneNumber } = req.body;
-  const mailOptions = {
-    From: firstName,
-    to: process.env.CONTACT_MAIL,
+  const mail = {
+    from: 'FarmConnect',
+    to: process.env.CONTACT_EMAIL,
     subject: 'Contact Form Submission',
     html: `<p>Nom : ${lastName}</p>
     <p>Prénom : ${firstName}</p>
@@ -27,9 +28,8 @@ router.post('/', (req, res) => {
     `,
   };
 
-  contactMail.sendMail(mailOptions, (err) => {
+  contactMail.sendMail(mail, (err) => {
     if (err) {
-      console.log(err);
       res.json({ status: 'Error sending the message...' });
     } else {
       res.json({ status: 'Message sent !' });
