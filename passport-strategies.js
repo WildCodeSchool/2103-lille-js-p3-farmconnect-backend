@@ -14,7 +14,7 @@ passport.use(
     async (formMail, formPassword, done) => {
       try {
         const [sqlRes] = await db.query(
-          `SELECT id, email, firstname, lastname, password FROM users WHERE mail=?`,
+          `SELECT id, email, firstname, lastname, password FROM users WHERE email=?`,
           [formMail]
         );
         if (!sqlRes.length) return done(null, false);
