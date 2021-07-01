@@ -13,7 +13,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = 'SELECT * FROM applications WHERE id=?';
   const sqlValues = [id];
-  const [results] = await db.query(sql, sqlValues);
+  const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
 });
 
