@@ -13,6 +13,7 @@ const contactMail = nodemailer.createTransport({
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);
   const { firstName, lastName, email, message, phoneNumber } = req.body;
   const mailOptions = {
     From: firstName,
@@ -28,6 +29,7 @@ router.post('/', (req, res) => {
 
   contactMail.sendMail(mailOptions, (err) => {
     if (err) {
+      console.log(err);
       res.json({ status: 'Error sending the message...' });
     } else {
       res.json({ status: 'Message sent !' });
