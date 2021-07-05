@@ -3,10 +3,12 @@ const express = require('express');
 const router = express.Router();
 const { db } = require('../conf');
 
-router.get('/', async (req, res) => {
+router.get('/info/:id', async (req, res) => {
+  const { id } = req.params;
   const sql =
-    'SELECT id, firstname, lastname, zipcode, city, country, email, mobile FROM users where email=?';
-  const [results] = await db.query(sql);
+    'SELECT email, firstname, lastname, zipcode, city, country, email, mobile FROM users WHERE id=?';
+  const sqlValues = [id];
+  const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
 });
 
