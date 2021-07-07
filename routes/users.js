@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
   WHERE 
     id=?`;
   const sqlValues = [id];
-  const [results] = await db.query(sql, sqlValues);
+  const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
 });
 
