@@ -17,13 +17,13 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = `
   SELECT 
-    sex, firstname, lastname, zipcode, city, country, email, mobile 
+    id, sex, firstname, lastname, zipcode, city, country, email, mobile 
   FROM 
     users 
   WHERE 
     id=?`;
   const sqlValues = [id];
-  const [results] = await db.query(sql, sqlValues);
+  const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
 });
 

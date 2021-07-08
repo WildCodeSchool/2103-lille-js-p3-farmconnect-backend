@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql =
-    'SELECT id, name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app FROM applications';
+    'SELECT name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app FROM applications WHERE id=?';
   const sqlValues = [id];
-  const [results] = await db.query(sql, sqlValues);
+  const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
 });
 
