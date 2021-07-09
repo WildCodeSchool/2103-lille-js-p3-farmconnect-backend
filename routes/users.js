@@ -35,7 +35,7 @@ router.put('/:id', async (req, res) => {
   UPDATE 
     users 
   SET 
-    sex=?,firstname=?, lastname=?, zipcode=?, city=?, country=?, email=?, mobile=? 
+   sex=?, firstname=?, lastname=?, zipcode=?, city=?, country=?, email=?, mobile=? 
   WHERE 
     id=?`;
   const sqlValues = [
