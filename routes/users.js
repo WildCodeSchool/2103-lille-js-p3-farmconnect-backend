@@ -17,7 +17,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = `
   SELECT 
-    id, sex, firstname, lastname, zipcode, city, country, email, mobile 
+    sex, firstname, lastname, zipcode, city, country, email, mobile 
   FROM 
     users 
   WHERE 
