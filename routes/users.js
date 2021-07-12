@@ -6,7 +6,7 @@ const { db } = require('../conf');
 router.get('/', async (req, res) => {
   const sql = `
     SELECT 
-      id, sex, firstname, lastname, zipcode, city, country, email, mobile 
+      id, sex, firstname, lastname, zipcode, city, country, email, mobile, isStaff 
     FROM 
       users`;
   const [results] = await db.query(sql);
@@ -17,7 +17,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = `
   SELECT 
-    sex, firstname, lastname, zipcode, city, country, email, mobile 
+    sex, firstname, lastname, zipcode, city, country, email, mobile, isStaff 
   FROM 
     users 
   WHERE 
@@ -29,13 +29,22 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { sex, firstname, lastname, zipcode, city, country, email, mobile } =
-    req.body;
+  const {
+    sex,
+    firstname,
+    lastname,
+    zipcode,
+    city,
+    country,
+    email,
+    mobile,
+    isStaff,
+  } = req.body;
   const sql = `
   UPDATE 
     users 
   SET 
-   sex=?, firstname=?, lastname=?, zipcode=?, city=?, country=?, email=?, mobile=? 
+   sex=?, firstname=?, lastname=?, zipcode=?, city=?, country=?, email=?, mobile=?, isStaff=? 
   WHERE 
     id=?`;
   const sqlValues = [
@@ -47,6 +56,7 @@ router.put('/:id', async (req, res) => {
     country,
     email,
     mobile,
+    isStaff,
     id,
   ];
   try {
