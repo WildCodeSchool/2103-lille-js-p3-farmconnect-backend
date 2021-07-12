@@ -7,7 +7,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = `
   SELECT 
-    applications.id, name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app
+    applications.id, name, description, logo, banner, isFree, appWeb, appAndroid, appios, providerApp
   FROM 
     applications_has_users
   JOIN 

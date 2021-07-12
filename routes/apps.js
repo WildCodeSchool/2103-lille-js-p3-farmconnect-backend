@@ -5,7 +5,7 @@ const { db } = require('../conf');
 
 router.get('/', async (req, res) => {
   const sql =
-    'SELECT id, name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app FROM applications';
+    'SELECT id, name, description, logo, banner, isFree, appWeb, appAndroid, appIos, providerApp FROM applications';
   const [results] = await db.query(sql);
   res.json(results);
 });
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql =
-    'SELECT name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app FROM applications WHERE id=?';
+    'SELECT name, description, logo, banner, isFree, appWeb, appAndroid, appIos, providerApp FROM applications WHERE id=?';
   const sqlValues = [id];
   const [[results]] = await db.query(sql, sqlValues);
   res.json(results);
