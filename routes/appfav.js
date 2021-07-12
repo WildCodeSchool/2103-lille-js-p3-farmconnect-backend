@@ -3,11 +3,25 @@ const express = require('express');
 const router = express.Router();
 const { db } = require('../conf');
 
+router.get('/:id/:app', async (req, res) => {
+  const { app, id } = req.params;
+  const sql = `
+  SELECT 
+    applications_id 
+  FROM
+    applications_has_users
+  WHERE (applications_id=? AND users_id=?)
+  `;
+  const sqlValues = [app, id];
+  const [[results]] = await db.query(sql, sqlValues);
+  res.json(results);
+});
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const sql = `
   SELECT 
-    applications.id, name, description, logo, banner, isFree, app_web, app_android, app_ios, provider_app
+    applications.id, name, description, logo, banner, isFree, appWeb, appAndroid, appIos, providerApp
   FROM 
     applications_has_users
   JOIN 
