@@ -68,25 +68,31 @@ router.put('/:id', async (req, res) => {
     logo,
     banner,
     isFree,
-    appweb,
-    appandroid,
-    appios,
-    providerapp,
+    appWeb,
+    appAndroid,
+    appIos,
+    providerApp,
   } = req.body;
-  const sql =
-    'UPDATE applications SET name=?, description=?, logo=?, banner=?, isFree=?, appWeb=?, appAndroid=?, appIos=?, providerApp=? WHERE id=?';
+  const sql = `
+  UPDATE 
+    applications 
+  SET 
+    name=?, description=?, logo=?, banner=?, isFree=?, appWeb=?, appAndroid=?, appIos=?, providerApp=? 
+  WHERE 
+    id=?`;
   const sqlValues = [
     name,
     description,
     logo,
     banner,
     isFree,
-    appweb,
-    appandroid,
-    appios,
-    providerapp,
+    appWeb,
+    appAndroid,
+    appIos,
+    providerApp,
     id,
   ];
+
   try {
     const [results] = await db.query(sql, sqlValues);
     res.status(201).json(results);
