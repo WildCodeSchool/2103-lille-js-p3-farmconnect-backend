@@ -14,15 +14,15 @@ passport.use(
     async (formMail, formPassword, done) => {
       try {
         const [sqlRes] = await db.query(
-          `SELECT id, email, firstname, lastname, password FROM users WHERE email=?`,
+          `SELECT id, email, firstname, lastname, password, isStaff FROM users WHERE email=?`,
           [formMail]
         );
         if (!sqlRes.length) return done(null, false);
-        const { id, email, firstname, lastname, password } = sqlRes[0];
+        const { id, email, firstname, lastname, password, isStaff } = sqlRes[0];
         const isPasswordOK = bcrypt.compareSync(formPassword, password);
         if (!isPasswordOK) return done(null, false, 'Wrong password!');
 
-        const user = { id, email, firstname, lastname };
+        const user = { id, email, firstname, lastname, isStaff };
         return done(null, user);
       } catch (e) {
         return done(e);
