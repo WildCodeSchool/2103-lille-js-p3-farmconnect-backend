@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { db } = require('../conf');
 
-router.get('/:id/:app', async (req, res) => {
-  const { app, id } = req.params;
+router.get('/:idApp/:idUser', async (req, res) => {
+  const { idApp, idUser } = req.params;
   const sql = `
   SELECT 
     applications_id 
@@ -12,8 +12,20 @@ router.get('/:id/:app', async (req, res) => {
     applications_has_users
   WHERE (applications_id=? AND users_id=?)
   `;
-  const sqlValues = [app, id];
+  const sqlValues = [idApp, idUser];
   const [[results]] = await db.query(sql, sqlValues);
+  res.json(results);
+});
+
+router.delete('/:idApp/:idUser', async (req, res) => {
+  const { idApp, idUser } = req.params;
+  const sql = `
+  DELETE FROM
+    applications_has_users
+  WHERE (applications_id=? AND users_id=?)
+  `;
+  const sqlValues = [idApp, idUser];
+  const [results] = await db.query(sql, sqlValues);
   res.json(results);
 });
 
@@ -47,18 +59,12 @@ router.post('/', async (req, res) => {
     applications_has_users (users_id, applications_id) 
   VALUES(?,?)`;
   const sqlValues = [usersId, applicationsId];
+
   try {
     const [results] = await db.query(sql, sqlValues);
+    // TODO
     return res.status(201).json(results);
   } catch (err) {
-    if (err.code === 'ER_DUP_ENTRY') {
-      // 409: Conflict
-      return res.status(409).send('This user already exists!');
-    }
-    if (err.code === 'ER_BAD_NULL_ERROR') {
-      // 422 : Unprocessable Entity
-      return res.status(422).send('Please fill all fields!');
-    }
     return res.status(500).send('Generic error message');
   }
 });
