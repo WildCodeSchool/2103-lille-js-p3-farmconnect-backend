@@ -62,7 +62,6 @@ router.post('/', async (req, res) => {
 
   try {
     const [results] = await db.query(sql, sqlValues);
-    // TODO
     return res.status(201).json(results);
   } catch (err) {
     return res.status(500).send('Generic error message');
