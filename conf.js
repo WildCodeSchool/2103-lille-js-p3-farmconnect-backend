@@ -10,6 +10,7 @@ const {
   JWT_SALTROUNDS,
   JWT_SECRET,
   FRONTEND_URL,
+  ADMIN_URL,
 } = process.env;
 
 const db = mysql.createPool({
@@ -26,4 +27,5 @@ module.exports = {
   jwtrounds: parseInt(JWT_SALTROUNDS, 10),
   jwtsecret: JWT_SECRET,
   frontendUrl: FRONTEND_URL,
+  adminUrl: ADMIN_URL,
 };
